@@ -28,11 +28,11 @@ app.post('/api/data', async (req, res) => {
     try {
       const receivedData = req.body.data;
       console.log('Received data:', receivedData);
-
+      
       putData(receivedData);
     }
     catch(error){
-        console.log("data received");
+        console.log("data not received");
     }});
 
 function putData(receivedData){
@@ -41,6 +41,8 @@ function putData(receivedData){
     userModel.insertMany(newUser)
     .then(user => console.log('User saved:', user))
     .catch(err => console.error('Error saving user:', err));
+
+    getData();
 }
 
 function getData(){
@@ -48,36 +50,6 @@ function getData(){
     .then(users => console.log('All users:', users))
     .catch(err => console.error('Error retrieving users:', err));
 }
-
-
-
-// app.post("/api/data", (req,res) => {
-//     res.json(userModel.find().then(function(users){
-//         res.json(users);
-//         console.log(users);
-//     })).catch(function(err){
-//         console.log('error');
-//     });
-// })
-
-// const newUser = new userModel({
-//     username : ,
-//     useremail : ,
-//     userpassword : ,
-//     userphno : ,
-//     userage : ,
-//     usergender : ,
-//     userexperience : 
-// });
-
-// userModel.insertMany(newUser)
-//   .then(user => console.log('User saved:', user))
-//   .catch(err => console.error('Error saving user:', err));
-
-
-// userModel.find()
-// .then(users => console.log('All users:', users))
-// .catch(err => console.error('Error retrieving users:', err));
 
 app.listen(5000, () => {
     console.log('server listening at 5000');
