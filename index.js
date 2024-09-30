@@ -35,6 +35,18 @@ app.post('/api/data', async (req, res) => {
         console.log("data not received");
     }});
 
+app.post('/api/login_data', async(req,res) => {
+    try{
+        const receivedLogin = req.body.data;
+        console.log('Received data:', receivedLogin);
+
+        putData(receivedLogin);
+    }
+    catch(error){
+        console.log("data not received");
+    }});
+
+
 function putData(receivedData){
     const newUser = new userModel(receivedData);
 
@@ -46,7 +58,7 @@ function putData(receivedData){
 }
 
 function getData(){
-    userModel.find()
+    const db_received = userModel.find()
     .then(users => console.log('All users:', users))
     .catch(err => console.error('Error retrieving users:', err));
 }
