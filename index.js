@@ -38,17 +38,17 @@ app.post('/api/data', async (req, res) => {
 app.post('/api/login_data', async(req,res) => {
     try{
         const receivedLogin = req.body.data;
-        console.log('Received data:', receivedLogin);
+        console.log('Received Login data:', receivedLogin);
 
         putData(receivedLogin);
     }
     catch(error){
-        console.log("data not received");
+        console.log("login data not received");
     }});
 
 
-function putData(receivedData){
-    const newUser = new userModel(receivedData);
+function putData(data){
+    const newUser = new userModel(data);
 
     userModel.insertMany(newUser)
     .then(user => console.log('User saved:', user))
@@ -58,9 +58,12 @@ function putData(receivedData){
 }
 
 function getData(){
-    const db_received = userModel.find()
+    userModel.find()
     .then(users => console.log('All users:', users))
+    .then(console.log("This data received : "+users[0]))
     .catch(err => console.error('Error retrieving users:', err));
+
+    console.log("This data received : "+users[0]);
 }
 
 app.listen(5000, () => {
