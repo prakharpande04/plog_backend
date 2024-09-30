@@ -30,6 +30,10 @@ app.post('/api/data', async (req, res) => {
       console.log('Received data:', receivedData);
       
       putData(receivedData);
+
+      app.get('/api/data', (req,res) => {
+      res.json({message:"done"});
+      });
     }
     catch(error){
         console.log("data not received");
@@ -60,10 +64,7 @@ function putData(data){
 function getData(){
     userModel.find()
     .then(users => console.log('All users:', users))
-    .then(console.log("This data received : "+users[0]))
     .catch(err => console.error('Error retrieving users:', err));
-
-    console.log("This data received : "+users[0]);
 }
 
 app.listen(5000, () => {
